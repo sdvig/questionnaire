@@ -4,11 +4,11 @@ import './NavigationButtons.css';
 class NavigationButtons extends Component {
 
   render() {
-
+    const {showNext, showBack, onNext, onBack} = this.props;
     return (
       <div className="NavigationButtons">
-        <a className="Button BackButton" href="#">Back</a>
-        <a className="Button NextButton DisabledButton" href="#">Next</a>
+        {showBack && <button onClick={onBack} className="Button BackButton">Back</button>}
+        {showNext && <button onClick={onNext} className="Button NextButton">Next</button> }
       </div>
     );
   }
