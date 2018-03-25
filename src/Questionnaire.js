@@ -13,8 +13,9 @@ class Questionnaire extends Component {
     super();
 
     this.state = {
-      questionnaire: theQuestions,
+      questions: theQuestions,
       currentQuestion: 0,
+      answers: [],
     };
 
     this.gotoNextQuestion = this.gotoNextQuestion.bind(this);
@@ -34,9 +35,9 @@ class Questionnaire extends Component {
   }
 
   render() {
-    const {currentQuestion, questionnaire} = this.state;
+    const {currentQuestion, questions} = this.state;
     const hasPreviousQuestion = currentQuestion > 0;
-    const hasNextQuestion = currentQuestion < questionnaire.length - 1;
+    const hasNextQuestion = currentQuestion < questions.length - 1;
     return (
       <div className="Questionnaire">
         <ProgressBar />

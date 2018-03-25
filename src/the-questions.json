@@ -1,9 +1,14 @@
 [{
-    "question": "How old are you?"
+    "question": "How old are you?",
+    "type": "textInput"
   },
   {
-    "question": "How old are you, again please?"
+    "question": "How old are you, again please?",
+    "type": "dropdown",
+    "options": ["0", "42", "99"]
   },
   {
-    "question": "What?! How old are you?!?!"
+    "question": "What?! How old are you?!?!",
+    "type": "radioButtons",
+    "options": ["0", "42", "99"]
   }]
