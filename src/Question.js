@@ -13,12 +13,25 @@ class Question extends Component {
     const isTextInput = type === 'textInput';
     const isDropdown = type === 'dropdown';
     const isRadiobuttons = type === 'radioButtons';
+
     return (
       <div className="Question">
         <p>{question}</p>
-        {isTextInput && <input type="text" value={answer || ''} onChange={onUserInput} />}
-        {isDropdown && <Dropdown options={options} answer={answer} onUserInput={onUserInput} />}
-        {isRadiobuttons && <RadioButtons options={options} answer={answer} onUserInput={onUserInput} />}
+        {isTextInput && <input
+          type="text"
+          value={answer || ''}
+          onChange={onUserInput}
+        />}
+        {isDropdown && <Dropdown
+          options={options}
+          answer={answer}
+          onUserInput={onUserInput}
+        />}
+        {isRadiobuttons && <RadioButtons
+          options={options}
+          answer={answer}
+          onUserInput={onUserInput}
+        />}
       </div>
     );
   }
