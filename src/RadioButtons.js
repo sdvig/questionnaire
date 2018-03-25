@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class RadioButtons extends Component {
 
   render() {
-    const {options} = this.props;
+    const {options, onUserInput, answer} = this.props;
     return (
       <div className="RadioButtons">
         {options.map((option, i) => <div key={i}>
@@ -11,7 +11,9 @@ class RadioButtons extends Component {
             type="radio"
             id={`option${i}`}
             name="options"
-            value={option}/>
+            value={option}
+            checked={option===answer}
+            onChange={onUserInput} />
           <label htmlFor={`option${i}`}>{option}</label>
         </div>)}
       </div>
