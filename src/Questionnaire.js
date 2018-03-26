@@ -13,10 +13,16 @@ class Questionnaire extends Component {
   constructor() {
     super();
 
+    // Assuming that the questionnaire didn't change
+    const localAnswers = JSON.parse(localStorage.getItem('answers'));
+    const localCurrentPage = parseInt(localStorage.getItem('currentQuestion'), 10);
+    const localShowSummary = localStorage.getItem('showSummary');
+
     this.state = {
       questions: theQuestions,
-      currentQuestion: 0,
-      answers: [],
+      currentQuestion: localCurrentPage || 0,
+      answers: localAnswers || [],
+      showSummary: localShowSummary || false
     };
 
     this.gotoNextQuestion = this.gotoNextQuestion.bind(this);
@@ -25,32 +31,37 @@ class Questionnaire extends Component {
     this.gotoSummary = this.gotoSummary.bind(this);
   }
 
+  setCurrentQuestion(currentQuestion) {
+    this.setState({currentQuestion});
+    localStorage.setItem('currentQuestion', currentQuestion)
+  }
+
   gotoNextQuestion() {
     let {currentQuestion} = this.state;
-    currentQuestion++;
-    this.setState({currentQuestion});
+    this.setCurrentQuestion(currentQuestion + 1);
+
   }
 
   gotoPreviousQuestion() {
     let {currentQuestion} = this.state;
-    currentQuestion--;
-    this.setState({currentQuestion});
+    this.setCurrentQuestion(currentQuestion - 1);
   }
 
   gotoSummary() {
-    this.setState({currentQuestion: 'all'});
+    this.setState({showSummary: true});
+    localStorage.setItem('showSummary', true);
   }
 
   handleUserInput(e) {
     let {answers, currentQuestion} = this.state;
     answers[currentQuestion] = e.target.value;
     this.setState({answers});
+    localStorage.setItem('answers', JSON.stringify(answers));
   }
 
   render() {
 
-    const {currentQuestion, questions, answers} = this.state;
-    const showSummary = currentQuestion === 'all';
+    const {currentQuestion, questions, answers, showSummary} = this.state;
     const hasPreviousQuestion = currentQuestion > 0;
     const hasNextQuestion = currentQuestion < questions.length - 1;
     const hasNoAnswer = !answers[currentQuestion];
