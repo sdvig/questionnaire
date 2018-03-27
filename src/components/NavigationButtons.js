@@ -18,16 +18,16 @@ class NavigationButtons extends Component {
       <div className="NavigationButtons">
         {showBack && <button
           onClick={onBack}
-          className="Button BackButton">Back
+          className="Button LeftAlignedButton">Back
         </button>}
         {showNext && <button
           onClick={onNext}
-          className="Button NextButton"
+          className="Button RightAlignedButton"
           disabled={nextDisabled}>Next
         </button>}
-        {!showNext && onFinish && <button
+        {!showNext && <button
           onClick={onFinish}
-          className="Button NextButton"
+          className="Button RightAlignedButton"
           disabled={nextDisabled}>Finish
         </button>}
       </div>
