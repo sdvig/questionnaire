@@ -8,9 +8,9 @@ class NavigationButtons extends Component {
     const {
       showNext,
       showBack,
+      nextDisabled,
       onNext,
       onBack,
-      nextDisabled,
       onFinish
     } = this.props;
 
@@ -25,7 +25,7 @@ class NavigationButtons extends Component {
           className="Button NextButton"
           disabled={nextDisabled}>Next
         </button>}
-        {!showNext && <button
+        {!showNext && onFinish && <button
           onClick={onFinish}
           className="Button NextButton"
           disabled={nextDisabled}>Finish
