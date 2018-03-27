@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './Questionnaire.css';
 
-import ProgressBar from './ProgressBar';
-import Question from './Question';
-import NavigationButtons from './NavigationButtons';
-import QuestionnaireSummary from './QuestionnaireSummary';
+import ProgressBar from './components/ProgressBar';
+import Question from './components/Question';
+import NavigationButtons from './components/NavigationButtons';
+import QuestionnaireSummary from './components/QuestionnaireSummary';
 
-import theQuestions from './the-questions.json';
+import theQuestions from './data/the-questions.json';
 
 class Questionnaire extends Component {
 
