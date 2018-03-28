@@ -1,4 +1,4 @@
-@import "reset", "colors", "typography";
+@import "reset", "colors", "typography", "breakpoints";
 
 html, body, #root { height: 100%; }
 
