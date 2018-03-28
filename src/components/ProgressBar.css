@@ -1,5 +1,12 @@
+@import "../styles/colors";
+
 .ProgressBar {
-  background: #FAFAFA;
+  background: $background-color;
   height: 4px;
   margin-bottom: 2em;
+}
+
+.ProgressBar__Filling {
+  background: $corporate-yellow;
+  height: 4px;
 }

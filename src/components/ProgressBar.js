@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './ProgressBar.css';
 
-class ProgressBar extends Component {
-
-  render() {
-    return (
-      <div className="ProgressBar"></div>
-    );
-  }
+const ProgressBar = ({percentage}) => {
+  return (
+    <div className="ProgressBar">
+      <div style={{ width: `${percentage}%` }} className="ProgressBar__Filling" />
+    </div>
+  );
 }
 
 export default ProgressBar;

@@ -17,7 +17,7 @@ button {
   border-radius: 3px;
   font-size: 0.95em;
   padding: 0.75em 1.25em;
-  @include colorButton(#ffda00, #fc0, #4B4731);
+  @include colorButton($corporate-yellow, #fc0, #4B4731);
 }
 
 .Button:disabled {

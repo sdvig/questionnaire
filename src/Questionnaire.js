@@ -62,13 +62,14 @@ class Questionnaire extends Component {
   render() {
 
     const {currentQuestion, questions, answers, showSummary} = this.state;
+    const percentage = (currentQuestion + 1) * 100 / questions.length;
     const hasPreviousQuestion = currentQuestion > 0;
     const hasNextQuestion = currentQuestion < questions.length - 1;
     const hasNoAnswer = !answers[currentQuestion];
 
     return (
       <div className="Questionnaire">
-        <ProgressBar />
+        <ProgressBar percentage={percentage} />
         {!showSummary && <Question
             question={questions[currentQuestion]}
             answer={answers[currentQuestion]}
