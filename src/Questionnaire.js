@@ -1,91 +1,55 @@
 import React, { Component } from 'react';
-import './Questionnaire.css';
 
-import ProgressBar from './components/ProgressBar';
-import Question from './components/Question';
-import NavigationButtons from './components/NavigationButtons';
-import QuestionnaireSummary from './components/QuestionnaireSummary';
+import Questions from './questions.json';
 
-import theQuestions from './data/the-questions.json';
+import ProgressBar from './ProgressBar';
+import Question from './Question';
+import NavigationButtons from './NavigationButtons';
 
 class Questionnaire extends Component {
 
-  constructor() {
+  constructor(props) {
     super();
 
-    // Assuming that the questionnaire didn't change
-    const localAnswers = JSON.parse(localStorage.getItem('answers'));
-    const localCurrentPage = parseInt(localStorage.getItem('currentQuestion'), 10);
-    const localShowSummary = localStorage.getItem('showSummary');
-
     this.state = {
-      questions: theQuestions,
-      currentQuestion: localCurrentPage || 0,
-      answers: localAnswers || [],
-      showSummary: localShowSummary || false
+      questionNumber: props.current || 1,
+      answers: Questions.map(() => {
+        return {"answer": ""}
+      })
     };
 
-    this.gotoNextQuestion = this.gotoNextQuestion.bind(this);
-    this.gotoPreviousQuestion = this.gotoPreviousQuestion.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
-    this.gotoSummary = this.gotoSummary.bind(this);
   }
 
-  setCurrentQuestion(currentQuestion) {
-    this.setState({currentQuestion});
-    localStorage.setItem('currentQuestion', currentQuestion)
-  }
+  handleUserInput(event) {
+    const {answers, questionNumber} = this.state;
 
-  gotoNextQuestion() {
-    let {currentQuestion} = this.state;
-    this.setCurrentQuestion(currentQuestion + 1);
+    console.log('//// event: ', event);
+    console.log('//// answer is: ', event.target.value);
 
-  }
-
-  gotoPreviousQuestion() {
-    let {currentQuestion} = this.state;
-    this.setCurrentQuestion(currentQuestion - 1);
-  }
-
-  gotoSummary() {
-    this.setState({showSummary: true});
-    localStorage.setItem('showSummary', true);
-  }
-
-  handleUserInput(e) {
-    let {answers, currentQuestion} = this.state;
-    answers[currentQuestion] = e.target.value;
+    answers[questionNumber-1].answer = event.target.value;
     this.setState({answers});
-    localStorage.setItem('answers', JSON.stringify(answers));
   }
 
   render() {
+    console.log("Questionnaire state:",  this.state);
+    const {questionNumber, answers} = this.state;
 
-    const {currentQuestion, questions, answers, showSummary} = this.state;
-    const percentage = answers.length * 100 / questions.length;
-    const hasPreviousQuestion = currentQuestion > 0;
-    const hasNextQuestion = currentQuestion < questions.length - 1;
-    const hasNoAnswer = !answers[currentQuestion];
+    const hasAnswer = this.state.answers[questionNumber-1].answer !== "";
 
     return (
-      <div className="Questionnaire">
-        <ProgressBar percentage={percentage} />
-        {!showSummary && <Question
-            question={questions[currentQuestion]}
-            answer={answers[currentQuestion]}
-            onUserInput={this.handleUserInput}
-          />}
-        {!showSummary && <NavigationButtons
-            showNext={hasNextQuestion}
-            showBack={hasPreviousQuestion}
-            onNext={this.gotoNextQuestion}
-            onBack={this.gotoPreviousQuestion}
-            nextDisabled={hasNoAnswer}
-            onFinish={this.gotoSummary}
-          />}
-        {showSummary && <div>
-          <QuestionnaireSummary questions={questions} answers={answers} />
-        </div>}
+      <div className="App">
+        <ProgressBar />
+        <Question
+          data={Questions[questionNumber-1]}
+          onUserInput={this.handleUserInput}
+          answer={answers[questionNumber-1].answer}
+        />
+        <NavigationButtons
+          current={questionNumber}
+          last={Questions.length}
+          nextDisabled={!hasAnswer}
+         />
       </div>
     );
   }
