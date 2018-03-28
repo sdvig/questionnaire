@@ -1,4 +1,8 @@
+@import "styles/common";
+
 .Questionnaire {
-  background-color: #FFF;
-  padding: 2em;
+  @include blockElement;
+  margin: 4em;
+  display: flex;
+  flex-direction: column;
 }

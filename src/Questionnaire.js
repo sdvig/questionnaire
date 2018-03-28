@@ -69,21 +69,19 @@ class Questionnaire extends Component {
     return (
       <div className="Questionnaire">
         <ProgressBar />
-        {!showSummary && <div>
-          <Question
+        {!showSummary && <Question
             question={questions[currentQuestion]}
             answer={answers[currentQuestion]}
             onUserInput={this.handleUserInput}
-          />
-          <NavigationButtons
+          />}
+        {!showSummary && <NavigationButtons
             showNext={hasNextQuestion}
             showBack={hasPreviousQuestion}
             onNext={this.gotoNextQuestion}
             onBack={this.gotoPreviousQuestion}
             nextDisabled={hasNoAnswer}
             onFinish={this.gotoSummary}
-          />
-        </div>}
+          />}
         {showSummary && <div>
           <QuestionnaireSummary questions={questions} answers={answers} />
         </div>}

@@ -1,0 +1,12 @@
+@import "reset", "colors", "typography";
+
+html, body, #root { height: 100%; }
+
+body {
+  background: $background-color;
+  color: $main-color;
+  font-family: $main-font;
+  font-size: $main-font-size;
+}
+
+#root { display: flex; }

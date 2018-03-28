@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './QuestionnaireSummary.css';
 
 class QuestionnaireSummary extends Component {
 
