@@ -59,10 +59,21 @@ class Questionnaire extends Component {
     localStorage.setItem('answers', JSON.stringify(answers));
   }
 
+  getAnswersNumber() {
+    const {answers} = this.state;
+    let count = 0;
+    for (var i = 0; i < answers.length; i++) {
+      if (i in answers && answers[i] !== "") {
+        count++;
+      }
+    }
+    return count;
+  }
+
   render() {
 
     const {currentQuestion, questions, answers, showSummary} = this.state;
-    const percentage = answers.length * 100 / questions.length;
+    const percentage = this.getAnswersNumber() * 100 / questions.length;
     const hasPreviousQuestion = currentQuestion > 0;
     const hasNextQuestion = currentQuestion < questions.length - 1;
     const hasNoAnswer = !answers[currentQuestion];
